@@ -1,0 +1,17 @@
+{
+  "name": "language-clojure",
+  "version": "0.0.0",
+  "description": "Clojure language support in Atom",
+  "engines": {
+    "atom": "*",
+    "node": "*"
+  },
+  "homepage": "http://atom.github.io/language-clojure",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atom/language-clojure"
+  },
+  "bugs": {
+    "url": "https://github.com/atom/language-clojure/issues"
+  }
+}
