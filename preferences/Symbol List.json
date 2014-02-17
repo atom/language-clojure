@@ -1,7 +1,0 @@
-{
-  "name": "Symbol List",
-  "scope": "entity.global.clojure",
-  "settings": {
-    "showInSymbolList": 1
-  }
-}
