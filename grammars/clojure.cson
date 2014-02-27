@@ -2,6 +2,7 @@
   'clj'
   'cljs'
   'clojure'
+  'edn'
 ]
 'foldingStartMarker': '\\(\\s*$'
 'foldingStopMarker': '^\\s*\\)'
