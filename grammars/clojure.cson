@@ -15,7 +15,7 @@
     'include': '#shebang-comment'
   }
   {
-    'include': '#qouted-sexp'
+    'include': '#quoted-sexp'
   }
   {
     'include': '#sexp'
@@ -113,7 +113,7 @@
         'include': '$self'
       }
     ]
-  'qouted-sexp':
+  'quoted-sexp':
     'begin': '([\'``]\\()'
     'beginCaptures':
       '1':
@@ -124,7 +124,7 @@
         'name': 'punctuation.section.expression.end.clojure'
       '2':
         'name': 'meta.after-expression.clojure'
-    'name': 'meta.qouted-expression.clojure'
+    'name': 'meta.quoted-expression.clojure'
     'patterns': [
       {
         'include': '$self'
