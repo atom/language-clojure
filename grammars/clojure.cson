@@ -228,21 +228,3 @@
     'match': '\\s+$'
     'name': 'invalid.trailing-whitespace'
 'scopeName': 'source.clojure'
-'smartTypingPairs': [
-  [
-    '"'
-    '"'
-  ]
-  [
-    '('
-    ')'
-  ]
-  [
-    '{'
-    '}'
-  ]
-  [
-    '['
-    ']'
-  ]
-]
