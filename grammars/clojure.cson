@@ -1,3 +1,4 @@
+'scopeName': 'source.clojure'
 'fileTypes': [
   'clj'
   'cljs'
@@ -227,4 +228,3 @@
   'whitespace':
     'match': '\\s+$'
     'name': 'invalid.trailing-whitespace'
-'scopeName': 'source.clojure'
