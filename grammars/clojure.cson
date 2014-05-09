@@ -166,7 +166,7 @@
     'name': 'meta.expression.clojure'
     'patterns': [
       {
-        'begin': '(?<=\\()(ns|def|def-|defn|defn-|defvar|defvar-|defmacro|defmacro-|deftest)\\s+(.+?)(?=\\s)'
+        'begin': '(?<=\\()(ns|def|def-|defn|defn-|defvar|defvar-|defmacro|defmacro-|deftest)\\s+(.+?)(?=\\s|\\))'
         'beginCaptures':
           '1':
             'name': 'keyword.control.clojure'
