@@ -46,6 +46,9 @@
     'include': '#constants'
   }
   {
+    'include': '#namespaced-symbol'
+  }
+  {
     'include': '#symbol'
   }
   {
@@ -90,10 +93,12 @@
         'name': 'constant.numeric.decimal.clojure'
       }
       {
-        'match': '(?<=(\\s|\\(|\\[|\\{)):[a-zA-Z0-9\\#\\.\\-\\_\\:\\+\\=\\>\\<\\/\\!\\?\\*]+(?=(\\s|\\)|\\]|\\}))'
-        'name': 'constant.keyword.clojure'
+        'include': '#keyword'
       }
     ]
+  'keyword':
+    'match': '(?<=(\\s|\\(|\\[|\\{)):[a-zA-Z0-9\\#\\.\\-\\_\\:\\+\\=\\>\\<\\/\\!\\?\\*]+(?=(\\s|\\)|\\]|\\}))'
+    'name': 'constant.keyword.clojure'
   'keyfn':
     'patterns': [
       {
@@ -181,6 +186,41 @@
         ]
       }
       {
+        'include': '#keyfn'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+      {
+        'include': '#constants'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+      {
+        'include': '#vector'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+      {
+        'match': '(?<=\\()(.+?)(?=\\s|\\))'
+        'captures':
+          '1':
+            'name': 'entity.name.function.clojure'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+      {
         'include': '$self'
       }
     ]
@@ -206,10 +246,22 @@
         'name': 'constant.character.escape.clojure'
       }
     ]
+  'namespaced-symbol':
+    'patterns': [
+      {
+        'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]+)/([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\/\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]+)'
+        'name': 'meta.symbol.namespaced-symbol.clojure'
+        'captures':
+          '1':
+            'name': 'meta.symbol.namespace.clojure'
+          '2':
+            'name': 'meta.symbol.clojure'
+      }
+    ]
   'symbol':
     'patterns': [
       {
-        'match': '(\\w[\\w\\d]+)'
+        'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]+)'
         'name': 'meta.symbol.clojure'
       }
     ]
