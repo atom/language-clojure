@@ -6,13 +6,13 @@
     "atom": "*",
     "node": "*"
   },
-  "homepage": "https://github.com/hanjos/language-clojure",
+  "homepage": "http://atom.github.io/language-clojure",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hanjos/language-clojure"
+    "url": "https://github.com/atom/language-clojure"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hanjos/language-clojure/issues"
+    "url": "https://github.com/atom/language-clojure/issues"
   }
 }
