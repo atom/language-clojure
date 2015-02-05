@@ -242,7 +242,9 @@
             ]
           }
           {
-            'include': '#symbol'
+            # copied and pasted from #symbol, screw it
+            'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]+)'
+            'name': 'entity.global.clojure'
             'patterns': [
               {
                 'include': '$self'
