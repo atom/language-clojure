@@ -52,7 +52,7 @@
     'include': '#metadata'
   }
   {
-    'include': '#namespaced-symbol'
+    'include': '#namespace-symbol'
   }
   {
     'include': '#symbol'
@@ -98,7 +98,7 @@
         'match': '(\\d+)'
         'name': 'constant.numeric.decimal.clojure'
       }
-      {
+      { # separating the pattern for reuse
         'include': '#keyword'
       }
     ]
@@ -197,7 +197,13 @@
     'name': 'string.regexp.clojure'
   'set':
     'begin': '(\\#\\{)'
+    'beginCaptures':
+      '1':
+        'name': 'meta.set.begin.clojure'
     'end': '(\\})'
+    'endCaptures':
+      '1':
+        'name': 'meta.set.end.clojure'
     'name': 'meta.set.clojure'
     'patterns': [
       {
@@ -226,6 +232,7 @@
         'name': 'meta.definition.global.clojure'
         'patterns': [
           {
+            # there may be some metadata before an actual definition
             'include': '#metadata'
             'patterns': [
               {
@@ -233,7 +240,7 @@
               }
             ]
           }
-          {
+          { # dynamic variables are rendered diferently
             'include': '#dynamic-variables'
             'patterns': [
               {
@@ -242,6 +249,7 @@
             ]
           }
           {
+            # recognizing a symbol as being defined here
             # copied and pasted from #symbol, screw it
             'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]+)'
             'name': 'entity.global.clojure'
@@ -317,16 +325,14 @@
         'name': 'constant.character.escape.clojure'
       }
     ]
-  'namespaced-symbol':
+  'namespace-symbol':
     'patterns': [
-      {
-        'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]+)/([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\/\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]+)'
-        'name': 'meta.symbol.namespaced-symbol.clojure'
+      { # copied from #symbol, plus a / at the end. Matches the "app/" part of
+        # "app/*config*"
+        'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]+)/'
         'captures':
           '1':
             'name': 'meta.symbol.namespace.clojure'
-          '2':
-            'name': 'meta.symbol.clojure'
       }
     ]
   'symbol':
