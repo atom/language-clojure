@@ -1,4 +1,4 @@
-# Clojure language support in Atom
+# Clojure language support in Atom [![Build Status](https://travis-ci.org/atom/language-clojure.svg?branch=master)](https://travis-ci.org/atom/language-clojure)
 
 Adds syntax highlighting to Clojure files in Atom.
 
