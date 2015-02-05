@@ -123,11 +123,11 @@
     'begin': '(\\{)'
     'beginCaptures':
       '1':
-        'name': 'meta.map.begin.clojure'
+        'name': 'punctuation.section.map.begin.clojure'
     'end': '(\\})'
     'endCaptures':
       '1':
-        'name': 'meta.map.end.clojure'
+        'name': 'punctuation.section.map.end.clojure'
     'name': 'meta.map.clojure'
     'patterns': [
       {
@@ -140,11 +140,11 @@
         'begin': '(\\^\\{)'
         'beginCaptures':
           '1':
-            'name': 'meta.metadata.map.begin.clojure'
+            'name': 'punctuation.section.metadata.map.begin.clojure'
         'end': '(\\})'
         'endCaptures':
           '1':
-            'name': 'meta.metadata.map.end.clojure'
+            'name': 'punctuation.section.metadata.map.end.clojure'
         'name': 'meta.metadata.map.clojure'
         'patterns': [
           {
@@ -199,11 +199,11 @@
     'begin': '(\\#\\{)'
     'beginCaptures':
       '1':
-        'name': 'meta.set.begin.clojure'
+        'name': 'punctuation.section.set.begin.clojure'
     'end': '(\\})'
     'endCaptures':
       '1':
-        'name': 'meta.set.end.clojure'
+        'name': 'punctuation.section.set.end.clojure'
     'name': 'meta.set.clojure'
     'patterns': [
       {
