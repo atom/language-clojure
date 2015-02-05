@@ -46,6 +46,12 @@
     'include': '#constants'
   }
   {
+    'include': '#dynamic-variables'
+  }
+  {
+    'include': '#metadata'
+  }
+  {
     'include': '#namespaced-symbol'
   }
   {
@@ -110,13 +116,54 @@
         'name': 'keyword.control.clojure'
       }
     ]
+  'dynamic-variables':
+    'match': '\\*[\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\d]+\\*'
+    'name': 'meta.symbol.dynamic.clojure'
   'map':
     'begin': '(\\{)'
+    'beginCaptures':
+      '1':
+        'name': 'meta.map.begin.clojure'
     'end': '(\\})'
+    'endCaptures':
+      '1':
+        'name': 'meta.map.end.clojure'
     'name': 'meta.map.clojure'
     'patterns': [
       {
         'include': '$self'
+      }
+    ]
+  'metadata':
+    'patterns': [
+      {
+        'begin': '(\\^\\{)'
+        'beginCaptures':
+          '1':
+            'name': 'meta.metadata.map.begin.clojure'
+        'end': '(\\})'
+        'endCaptures':
+          '1':
+            'name': 'meta.metadata.map.end.clojure'
+        'name': 'meta.metadata.map.clojure'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
+      }
+      {
+        'begin': '(\\^)'
+        'end': '(\\s|\\n)'
+        'name': 'meta.metadata.simple.clojure'
+        'patterns': [
+          {
+            'include': '#keyword'
+          }
+          {
+            'include': '$self'
+          }
+        ]
       }
     ]
   'quoted-sexp':
@@ -171,15 +218,37 @@
     'name': 'meta.expression.clojure'
     'patterns': [
       {
-        'begin': '(?<=\\()(ns|def|def-|defn|defn-|defvar|defvar-|defmacro|defmacro-|deftest)\\s+(.+?)(?=\\s|\\))'
+        'begin': '(?<=\\()(ns|def|def-|defn|defn-|defvar|defvar-|defmacro|defmacro-|deftest)\\s+'
         'beginCaptures':
           '1':
             'name': 'keyword.control.clojure'
-          '2':
-            'name': 'entity.global.clojure'
         'end': '(?=\\))'
         'name': 'meta.definition.global.clojure'
         'patterns': [
+          {
+            'include': '#metadata'
+            'patterns': [
+              {
+                'include': '$self'
+              }
+            ]
+          }
+          {
+            'include': '#dynamic-variables'
+            'patterns': [
+              {
+                'include': '$self'
+              }
+            ]
+          }
+          {
+            'include': '#symbol'
+            'patterns': [
+              {
+                'include': '$self'
+              }
+            ]
+          }
           {
             'include': '$self'
           }
