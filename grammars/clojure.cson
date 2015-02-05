@@ -154,7 +154,7 @@
       }
       {
         'begin': '(\\^)'
-        'end': '(\\s|\\n)'
+        'end': '(\\s)'
         'name': 'meta.metadata.simple.clojure'
         'patterns': [
           {
