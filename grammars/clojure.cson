@@ -310,7 +310,7 @@
     'match': '^(\\#!).*$\\n?'
     'name': 'comment.line.semicolon.clojure'
   'string':
-    'begin': '(")'
+    'begin': '(?<!\\\\)(")'
     'beginCaptures':
       '1':
         'name': 'punctuation.definition.string.begin.clojure'
