@@ -2,6 +2,7 @@
 'fileTypes': [
   'clj'
   'cljs'
+  'cljx'
   'clojure'
   'edn'
 ]
