@@ -3,7 +3,7 @@
     'prefix': 'ns'
     'body': """
       (ns ${1:name}
-        (:require [${2:libraries}]}))
+        (:require [${2:libraries}]))
       $0
     """
 
