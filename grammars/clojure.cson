@@ -79,7 +79,7 @@
         'match': '(true|false)'
         'name': 'constant.language.boolean.clojure'
       }
-           {
+      {
         'match': '(-?\\d+/\\d+)'
         'name': 'constant.numeric.ratio.clojure'
       }
