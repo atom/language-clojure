@@ -80,24 +80,36 @@
         'name': 'constant.language.boolean.clojure'
       }
       {
-        'match': '(\\d+/\\d+)'
+        'match': '(-?\\d+/\\d+)'
         'name': 'constant.numeric.ratio.clojure'
       }
       {
-        'match': '(\\d+r\\d+)'
+        'match': '(-?\\d+[rR][0-9a-zA-Z]+)'
         'name': 'constant.numeric.arbitrary-radix.clojure'
       }
       {
-        'match': '(0x\\d+)'
-        'name': 'constant.numeric.hexidecimal.clojure'
+        'match': '(-?0[xX][0-9a-fA-F]+)'
+        'name': 'constant.numeric.hexadecimal.clojure'
       }
       {
-        'match': '(0\\d+)'
+        'match': '(-?0\\d+)'
         'name': 'constant.numeric.octal.clojure'
       }
       {
-        'match': '(\\d+)'
-        'name': 'constant.numeric.decimal.clojure'
+        'match': '(-?\\d+\\.\\d+([eE][+-]?\\d+)?M)'
+        'name': 'constant.numeric.bigdecimal.clojure'
+      }
+      {
+        'match': '(-?\\d+\\.\\d+([eE][+-]?\\d+)?)'
+        'name': 'constant.numeric.double.clojure'
+      }
+      {
+        'match': '(-?\\d+N)'
+        'name': 'constant.numeric.bigint.clojure'
+      }
+      {
+        'match': '(-?\\d+)'
+        'name': 'constant.numeric.long.clojure'
       }
       { # separating the pattern for reuse
         'include': '#keyword'
