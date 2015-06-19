@@ -1,11 +1,11 @@
 'scopeName': 'source.clojure'
 'fileTypes': [
   'clj'
+  'cljc'
   'cljs'
   'cljx'
   'clojure'
   'edn'
-  'cljc'
 ]
 'foldingStartMarker': '\\(\\s*$'
 'foldingStopMarker': '^\\s*\\)'
