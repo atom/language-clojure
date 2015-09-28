@@ -6,6 +6,7 @@
   'cljx'
   'clojure'
   'edn'
+  'build.boot'
 ]
 'foldingStartMarker': '\\(\\s*$'
 'foldingStopMarker': '^\\s*\\)'
