@@ -1,5 +1,6 @@
 'scopeName': 'source.clojure'
 'fileTypes': [
+  'build.boot'
   'clj'
   'cljc'
   'cljs'
