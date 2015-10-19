@@ -273,6 +273,14 @@
       {
         'include': '#vector'
       }
+      { # hack to keep it from highlighting the first parenthesis of an
+        # s-expression if it's the callee. Looks unusual otherwise.
+        'match': '(?<=\\()\\((?!\\s|\\))'
+        'patterns': [
+          {
+            'include': '$self'
+          }
+        ]
       {
         'match': '(?<=\\()(.+?)(?=\\s|\\))'
         'captures':
