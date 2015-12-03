@@ -332,7 +332,13 @@
     'name': 'meta.var.clojure'
   'vector':
     'begin': '(\\[)'
+    'beginCaptures':
+      '1':
+        'name': 'punctuation.section.vector.begin.clojure'
     'end': '(\\])'
+    'endCaptures':
+      '1':
+        'name': 'punctuation.section.vector.end.clojure'
     'name': 'meta.vector.clojure'
     'patterns': [
       {
