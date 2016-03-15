@@ -274,7 +274,13 @@
         'include': '#vector'
       }
       {
-        'match': '(?<=\\()([^\\(\\{]+?)(?=\\s|\\))'
+        'include': '#map'
+      }
+      {
+        'include': '#sexp'
+      }
+      {
+        'match': '(?<=\\()(.+?)(?=\\s|\\))'
         'captures':
           '1':
             'name': 'entity.name.function.clojure'
