@@ -274,6 +274,12 @@
         'include': '#vector'
       }
       {
+        'include': '#map'
+      }
+      {
+        'include': '#sexp'
+      }
+      {
         'match': '(?<=\\()(.+?)(?=\\s|\\))'
         'captures':
           '1':
