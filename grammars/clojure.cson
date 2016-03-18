@@ -139,7 +139,7 @@
     'beginCaptures':
       '1':
         'name': 'punctuation.section.map.begin.clojure'
-    'end': '(\\}(?=[\\}\\]\\)\\s]*(?:;|\\n)))|(\\})'
+    'end': '(\\}(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\})'
     'endCaptures':
       '1':
         'name': 'punctuation.section.map.end.clojure.paren-trail'
@@ -158,7 +158,7 @@
         'beginCaptures':
           '1':
             'name': 'punctuation.section.metadata.map.begin.clojure'
-        'end': '(\\}(?=[\\}\\]\\)\\s]*(?:;|\\n)))|(\\})'
+        'end': '(\\}(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\})'
         'endCaptures':
           '1':
             'name': 'punctuation.section.metadata.map.end.clojure.paren-trail'
@@ -190,7 +190,7 @@
     'beginCaptures':
       '1':
         'name': 'punctuation.section.expression.begin.clojure'
-    'end': '(\\))(\\n)|(\\)(?=[\\}\\]\\)\\s]*(?:;|\\n)))|(\\))'
+    'end': '(\\))(\\n)|(\\)(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\))'
     'endCaptures':
       '1':
         'name': 'punctuation.section.expression.end.clojure.paren-trail'
@@ -223,7 +223,7 @@
     'beginCaptures':
       '1':
         'name': 'punctuation.section.set.begin.clojure'
-    'end': '(\\}(?=[\\}\\]\\)\\s]*(?:;|\\n)))|(\\})'
+    'end': '(\\}(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\})'
     'endCaptures':
       '1':
         'name': 'punctuation.section.set.end.clojure.paren-trail'
@@ -240,7 +240,7 @@
     'beginCaptures':
       '1':
         'name': 'punctuation.section.expression.begin.clojure'
-    'end': '(\\))(\\n)|(\\)(?=[\\}\\]\\)\\s]*(?:;|\\n)))|(\\))'
+    'end': '(\\))(\\n)|(\\)(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\))'
     'endCaptures':
       '1':
         'name': 'punctuation.section.expression.end.clojure.paren-trail'
@@ -355,7 +355,7 @@
     'beginCaptures':
       '1':
         'name': 'punctuation.section.vector.begin.clojure'
-    'end': '(\\](?=[\\}\\]\\)\\s]*(?:;|\\n)))|(\\])'
+    'end': '(\\](?=[\\}\\]\\)\\s]*(?:;|$)))|(\\])'
     'endCaptures':
       '1':
         'name': 'punctuation.section.vector.end.clojure.paren-trail'
