@@ -142,7 +142,7 @@
     'end': '(\\}(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\})'
     'endCaptures':
       '1':
-        'name': 'punctuation.section.map.end.clojure.paren-trail'
+        'name': 'punctuation.section.map.end.trailing.clojure'
       '2':
         'name': 'punctuation.section.map.end.clojure'
     'name': 'meta.map.clojure'
@@ -161,7 +161,7 @@
         'end': '(\\}(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\})'
         'endCaptures':
           '1':
-            'name': 'punctuation.section.metadata.map.end.clojure.paren-trail'
+            'name': 'punctuation.section.metadata.map.end.trailing.clojure'
           '2':
             'name': 'punctuation.section.metadata.map.end.clojure'
         'name': 'meta.metadata.map.clojure'
@@ -193,11 +193,11 @@
     'end': '(\\))(\\n)|(\\)(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\))'
     'endCaptures':
       '1':
-        'name': 'punctuation.section.expression.end.clojure.paren-trail'
+        'name': 'punctuation.section.expression.end.trailing.clojure'
       '2':
         'name': 'meta.after-expression.clojure'
       '3':
-        'name': 'punctuation.section.expression.end.clojure.paren-trail'
+        'name': 'punctuation.section.expression.end.trailing.clojure'
       '4':
         'name': 'punctuation.section.expression.end.clojure'
     'name': 'meta.quoted-expression.clojure'
@@ -226,7 +226,7 @@
     'end': '(\\}(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\})'
     'endCaptures':
       '1':
-        'name': 'punctuation.section.set.end.clojure.paren-trail'
+        'name': 'punctuation.section.set.end.trailing.clojure'
       '2':
         'name': 'punctuation.section.set.end.clojure'
     'name': 'meta.set.clojure'
@@ -243,11 +243,11 @@
     'end': '(\\))(\\n)|(\\)(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\))'
     'endCaptures':
       '1':
-        'name': 'punctuation.section.expression.end.clojure.paren-trail'
+        'name': 'punctuation.section.expression.end.trailing.clojure'
       '2':
         'name': 'meta.after-expression.clojure'
       '3':
-        'name': 'punctuation.section.expression.end.clojure.paren-trail'
+        'name': 'punctuation.section.expression.end.trailing.clojure'
       '4':
         'name': 'punctuation.section.expression.end.clojure'
     'name': 'meta.expression.clojure'
@@ -358,7 +358,7 @@
     'end': '(\\](?=[\\}\\]\\)\\s]*(?:;|$)))|(\\])'
     'endCaptures':
       '1':
-        'name': 'punctuation.section.vector.end.clojure.paren-trail'
+        'name': 'punctuation.section.vector.end.trailing.clojure'
       '2':
         'name': 'punctuation.section.vector.end.clojure'
     'name': 'meta.vector.clojure'
