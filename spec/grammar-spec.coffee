@@ -117,7 +117,7 @@ describe "Clojure grammar", ->
     expect(tokens[1]).toEqual value: ":foo", scopes: ["source.clojure", "meta.metadata.map.clojure", "constant.keyword.clojure"]
     expect(tokens[2]).toEqual value: " ", scopes: ["source.clojure", "meta.metadata.map.clojure"]
     expect(tokens[3]).toEqual value: "true", scopes: ["source.clojure", "meta.metadata.map.clojure", "constant.language.boolean.clojure"]
-    expect(tokens[4]).toEqual value: "}", scopes: ["source.clojure", "meta.metadata.map.clojure", "punctuation.section.metadata.map.end.clojure"]
+    expect(tokens[4]).toEqual value: "}", scopes: ["source.clojure", "meta.metadata.map.clojure", "punctuation.section.metadata.map.end.trailing.clojure"]
 
   it "tokenizes functions", ->
     expressions = ["(foo)", "(foo 1 10)"]
@@ -148,7 +148,7 @@ describe "Clojure grammar", ->
     [start, mid..., end, after] = tokens
 
     expect(start).toEqual value: startsWith, scopes: ["source.clojure", "meta.#{metaScope}.clojure", "punctuation.section.#{puncScope}.begin.clojure"]
-    expect(end).toEqual value: endsWith, scopes: ["source.clojure", "meta.#{metaScope}.clojure", "punctuation.section.#{puncScope}.end.clojure"]
+    expect(end).toEqual value: endsWith, scopes: ["source.clojure", "meta.#{metaScope}.clojure", "punctuation.section.#{puncScope}.end.trailing.clojure"]
 
     for token in mid
       expect(token.scopes.slice(0, 2)).toEqual ["source.clojure", "meta.#{metaScope}.clojure"]
@@ -165,7 +165,7 @@ describe "Clojure grammar", ->
 
     [mid..., end, after] = tokens[1]
 
-    expect(end).toEqual value: endsWith, scopes: ["source.clojure", "meta.#{metaScope}.clojure", "punctuation.section.#{puncScope}.end.clojure"]
+    expect(end).toEqual value: endsWith, scopes: ["source.clojure", "meta.#{metaScope}.clojure", "punctuation.section.#{puncScope}.end.trailing.clojure"]
 
     for token in mid
       expect(token.scopes.slice(0, 2)).toEqual ["source.clojure", "meta.#{metaScope}.clojure"]
