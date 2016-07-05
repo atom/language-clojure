@@ -69,7 +69,7 @@
     'captures':
       '1':
         'name': 'punctuation.definition.comment.clojure'
-    'match': '(;).*$\\n?'
+    'match': '(?:(?<=[^\\\\])(;).*$\\n?)|(?:^(;).*$\\n?)'
     'name': 'comment.line.semicolon.clojure'
   'constants':
     'patterns': [
