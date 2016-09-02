@@ -2,13 +2,13 @@
 'fileTypes': [
   'boot'
   'clj'
+  'clj.hl'
   'cljc'
   'cljs'
+  'cljs.hl'
   'cljx'
   'clojure'
   'edn'
-  'clj.hl'
-  'cljs.hl'
   'org'
 ]
 'foldingStartMarker': '\\(\\s*$'
