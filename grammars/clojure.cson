@@ -7,6 +7,9 @@
   'cljx'
   'clojure'
   'edn'
+  'clj.hl'
+  'cljs.hl'
+  'org'
 ]
 'foldingStartMarker': '\\(\\s*$'
 'foldingStopMarker': '^\\s*\\)'
