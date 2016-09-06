@@ -209,3 +209,13 @@ describe "Clojure grammar", ->
     expect(tokens[6]).toEqual value: " ", scopes: ["source.clojure", "meta.expression.clojure"]
     expect(tokens[7]).toEqual value: ":foo", scopes: ["source.clojure", "meta.expression.clojure", "constant.keyword.clojure"]
     expect(tokens[8]).toEqual value: ")", scopes: ["source.clojure", "meta.expression.clojure", "punctuation.section.expression.end.trailing.clojure"]
+
+  it "tokenizes sets used in functions", ->
+    {tokens} = grammar.tokenizeLine "(\#{:foo :bar})"
+    expect(tokens[0]).toEqual value: "(", scopes: ["source.clojure", "meta.expression.clojure", "punctuation.section.expression.begin.clojure"]
+    expect(tokens[1]).toEqual value: "\#{", scopes: ["source.clojure", "meta.expression.clojure", "meta.set.clojure", "punctuation.section.set.begin.clojure"]
+    expect(tokens[2]).toEqual value: ":foo", scopes: ["source.clojure", "meta.expression.clojure", "meta.set.clojure", "constant.keyword.clojure"]
+    expect(tokens[3]).toEqual value: " ", scopes: ["source.clojure", "meta.expression.clojure", "meta.set.clojure"]
+    expect(tokens[4]).toEqual value: ":bar", scopes: ["source.clojure", "meta.expression.clojure", "meta.set.clojure", "constant.keyword.clojure"]
+    expect(tokens[5]).toEqual value: "}", scopes: ["source.clojure", "meta.expression.clojure", "meta.set.clojure", "punctuation.section.set.end.trailing.clojure"]
+    expect(tokens[6]).toEqual value: ")", scopes: ["source.clojure", "meta.expression.clojure", "punctuation.section.expression.end.trailing.clojure"]
