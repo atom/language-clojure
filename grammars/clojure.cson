@@ -219,8 +219,8 @@
       }
     ]
   'regexp_escaped_char':
-    'match': '\\\\(\\")'
-    'name': 'string.regexp.clojure'
+    'match': '\\\\'
+    'name': 'constant.character.escape.backslash.clojure'
   'set':
     'begin': '(\\#\\{)'
     'beginCaptures':
