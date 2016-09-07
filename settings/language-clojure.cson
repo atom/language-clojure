@@ -1,3 +1,4 @@
 '.source.clojure':
   'editor':
+    'autoIndentOnPaste': false
     'commentStart': '; '
