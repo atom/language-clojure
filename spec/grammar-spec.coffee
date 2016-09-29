@@ -227,3 +227,116 @@ describe "Clojure grammar", ->
     expect(tokens[4]).toEqual value: ":bar", scopes: ["source.clojure", "meta.expression.clojure", "meta.set.clojure", "constant.keyword.clojure"]
     expect(tokens[5]).toEqual value: "}", scopes: ["source.clojure", "meta.expression.clojure", "meta.set.clojure", "punctuation.section.set.end.trailing.clojure"]
     expect(tokens[6]).toEqual value: ")", scopes: ["source.clojure", "meta.expression.clojure", "punctuation.section.expression.end.trailing.clojure"]
+
+  describe "firstLineMatch", ->
+    it "recognises interpreter directives", ->
+      valid = """
+        #!/usr/sbin/boot foo
+        #!/usr/bin/boot foo=bar/
+        #!/usr/sbin/boot
+        #!/usr/sbin/boot foo bar baz
+        #!/usr/bin/boot perl
+        #!/usr/bin/boot bin/perl
+        #!/usr/bin/boot
+        #!/bin/boot
+        #!/usr/bin/boot --script=usr/bin
+        #! /usr/bin/env A=003 B=149 C=150 D=xzd E=base64 F=tar G=gz H=head I=tail boot
+        #!\t/usr/bin/env --foo=bar boot --quu=quux
+        #! /usr/bin/boot
+        #!/usr/bin/env boot
+      """
+      for line in valid.split /\n/
+        expect(grammar.firstLineRegex.scanner.findNextMatchSync(line)).not.toBeNull()
+
+      invalid = """
+        \x20#!/usr/sbin/boot
+        \t#!/usr/sbin/boot
+        #!/usr/bin/env-boot/node-env/
+        #!/usr/bin/das-boot
+        #! /usr/binboot
+        #!\t/usr/bin/env --boot=bar
+      """
+      for line in invalid.split /\n/
+        expect(grammar.firstLineRegex.scanner.findNextMatchSync(line)).toBeNull()
+
+    it "recognises Emacs modelines", ->
+      valid = """
+        #-*- Clojure -*-
+        #-*- mode: ClojureScript -*-
+        /* -*-clojureScript-*- */
+        // -*- Clojure -*-
+        /* -*- mode:Clojure -*- */
+        // -*- font:bar;mode:Clojure -*-
+        // -*- font:bar;mode:Clojure;foo:bar; -*-
+        // -*-font:mode;mode:Clojure-*-
+        // -*- foo:bar mode: clojureSCRIPT bar:baz -*-
+        " -*-foo:bar;mode:clojure;bar:foo-*- ";
+        " -*-font-mode:foo;mode:clojure;foo-bar:quux-*-"
+        "-*-font:x;foo:bar; mode : clojure; bar:foo;foooooo:baaaaar;fo:ba;-*-";
+        "-*- font:x;foo : bar ; mode : ClojureScript ; bar : foo ; foooooo:baaaaar;fo:ba-*-";
+      """
+      for line in valid.split /\n/
+        expect(grammar.firstLineRegex.scanner.findNextMatchSync(line)).not.toBeNull()
+
+      invalid = """
+        /* --*clojure-*- */
+        /* -*-- clojure -*-
+        /* -*- -- Clojure -*-
+        /* -*- Clojure -;- -*-
+        // -*- iClojure -*-
+        // -*- Clojure; -*-
+        // -*- clojure-door -*-
+        /* -*- model:clojure -*-
+        /* -*- indent-mode:clojure -*-
+        // -*- font:mode;Clojure -*-
+        // -*- mode: -*- Clojure
+        // -*- mode: das-clojure -*-
+        // -*-font:mode;mode:clojure--*-
+      """
+      for line in invalid.split /\n/
+        expect(grammar.firstLineRegex.scanner.findNextMatchSync(line)).toBeNull()
+
+    it "recognises Vim modelines", ->
+      valid = """
+        vim: se filetype=clojure:
+        # vim: se ft=clojure:
+        # vim: set ft=Clojure:
+        # vim: set filetype=Clojure:
+        # vim: ft=Clojure
+        # vim: syntax=Clojure
+        # vim: se syntax=Clojure:
+        # ex: syntax=Clojure
+        # vim:ft=clojure
+        # vim600: ft=clojure
+        # vim>600: set ft=clojure:
+        # vi:noai:sw=3 ts=6 ft=clojure
+        # vi::::::::::noai:::::::::::: ft=clojure
+        # vim:ts=4:sts=4:sw=4:noexpandtab:ft=clojure
+        # vi:: noai : : : : sw   =3 ts   =6 ft  =clojure
+        # vim: ts=4: pi sts=4: ft=clojure: noexpandtab: sw=4:
+        # vim: ts=4 sts=4: ft=clojure noexpandtab:
+        # vim:noexpandtab sts=4 ft=clojure ts=4
+        # vim:noexpandtab:ft=clojure
+        # vim:ts=4:sts=4 ft=clojure:noexpandtab:\x20
+        # vim:noexpandtab titlestring=hi\|there\\\\ ft=clojure ts=4
+      """
+      for line in valid.split /\n/
+        expect(grammar.firstLineRegex.scanner.findNextMatchSync(line)).not.toBeNull()
+
+      invalid = """
+        ex: se filetype=clojure:
+        _vi: se filetype=clojure:
+         vi: se filetype=clojure
+        # vim set ft=klojure
+        # vim: soft=clojure
+        # vim: clean-syntax=clojure:
+        # vim set ft=clojure:
+        # vim: setft=clojure:
+        # vim: se ft=clojure backupdir=tmp
+        # vim: set ft=clojure set cmdheight=1
+        # vim:noexpandtab sts:4 ft:clojure ts:4
+        # vim:noexpandtab titlestring=hi\\|there\\ ft=clojure ts=4
+        # vim:noexpandtab titlestring=hi\\|there\\\\\\ ft=clojure ts=4
+      """
+      for line in invalid.split /\n/
+        expect(grammar.firstLineRegex.scanner.findNextMatchSync(line)).toBeNull()
