@@ -41,12 +41,17 @@ describe "Clojure grammar", ->
     expect(tokens[2]).toEqual value: '"', scopes: ["source.clojure", "string.regexp.clojure"]
 
   it "tokenizes backslash escape character in regexes", ->
-    {tokens} = grammar.tokenizeLine '#"\\" "/"'
-    expect(tokens[1]).toEqual value: "\\", scopes: ['source.clojure', 'string.regexp.clojure', 'constant.character.escape.backslash.clojure']
+    {tokens} = grammar.tokenizeLine '#"\\\\" "/"'
+    expect(tokens[1]).toEqual value: "\\\\", scopes: ['source.clojure', 'string.regexp.clojure', 'constant.character.escape.clojure']
     expect(tokens[2]).toEqual value: '"', scopes: ['source.clojure', 'string.regexp.clojure']
     expect(tokens[4]).toEqual value: '"', scopes: ['source.clojure', 'string.quoted.double.clojure', 'punctuation.definition.string.begin.clojure']
     expect(tokens[5]).toEqual value: "/", scopes: ['source.clojure', 'string.quoted.double.clojure']
     expect(tokens[6]).toEqual value: '"', scopes: ['source.clojure', 'string.quoted.double.clojure', 'punctuation.definition.string.end.clojure']
+
+  it "tokenizes escaped double quote in regexes", ->
+    {tokens} = grammar.tokenizeLine '#"\\""'
+    expect(tokens[1]).toEqual value: '\\"', scopes: ['source.clojure', 'string.regexp.clojure', 'constant.character.escape.clojure']
+    expect(tokens[2]).toEqual value: '"', scopes: ['source.clojure', 'string.regexp.clojure']
 
   it "tokenizes numerics", ->
     numbers =
