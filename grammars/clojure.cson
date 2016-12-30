@@ -91,7 +91,7 @@
     'captures':
       '1':
         'name': 'punctuation.definition.comment.clojure'
-    'match': '(;).*$\\n?'
+    'match': '((?<=[^\\\\]);|^;).*$\\n?'
     'name': 'comment.line.semicolon.clojure'
   'constants':
     'patterns': [
