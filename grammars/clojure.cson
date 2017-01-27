@@ -88,10 +88,12 @@
 ]
 'repository':
   'comment':
-    'captures':
-      '1':
+    # NOTE: This must be kept as a begin/end match for language-todo to work
+    'begin': ';'
+    'beginCaptures':
+      '0':
         'name': 'punctuation.definition.comment.clojure'
-    'match': '(;).*$\\n?'
+    'end': '$'
     'name': 'comment.line.semicolon.clojure'
   'constants':
     'patterns': [
@@ -334,11 +336,13 @@
       }
     ]
   'shebang-comment':
-    'captures':
+    # NOTE: This must be kept as a begin/end match for language-todo to work
+    'begin': '^(#!)'
+    'beginCaptures':
       '1':
         'name': 'punctuation.definition.comment.shebang.clojure'
-    'match': '^(\\#!).*$\\n?'
-    'name': 'comment.line.semicolon.clojure'
+    'end': '$'
+    'name': 'comment.line.shebang.clojure'
   'string':
     'begin': '(?<!\\\\)(")'
     'beginCaptures':

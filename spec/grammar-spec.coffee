@@ -19,8 +19,8 @@ describe "Clojure grammar", ->
 
   it "tokenizes shebang comments", ->
     {tokens} = grammar.tokenizeLine "#!/usr/bin/env clojure"
-    expect(tokens[0]).toEqual value: "#!", scopes: ["source.clojure", "comment.line.semicolon.clojure", "punctuation.definition.comment.shebang.clojure"]
-    expect(tokens[1]).toEqual value: "/usr/bin/env clojure", scopes: ["source.clojure", "comment.line.semicolon.clojure"]
+    expect(tokens[0]).toEqual value: "#!", scopes: ["source.clojure", "comment.line.shebang.clojure", "punctuation.definition.comment.shebang.clojure"]
+    expect(tokens[1]).toEqual value: "/usr/bin/env clojure", scopes: ["source.clojure", "comment.line.shebang.clojure"]
 
   it "tokenizes strings", ->
     {tokens} = grammar.tokenizeLine '"foo bar"'
