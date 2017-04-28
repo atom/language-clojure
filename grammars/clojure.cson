@@ -278,7 +278,7 @@
     'patterns': [
       {
         # ns, declare and everything that starts with def* or namespace/def*
-        'begin': '(?<=\\()(ns|declare|def[\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*|[\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*/def[\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*)\\s+'
+        'begin': '(?<=\\()(ns|declare|def[\\w\\d._:+=><!?*-]*|[\\w._:+=><!?*-][\\w\\d._:+=><!?*-]*/def[\\w\\d._:+=><!?*-]*)\\s+'
         'beginCaptures':
           '1':
             'name': 'keyword.control.clojure'
