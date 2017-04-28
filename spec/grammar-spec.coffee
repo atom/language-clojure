@@ -109,9 +109,12 @@ describe "Clojure grammar", ->
       expect(tokens[1]).toEqual value: keyfn, scopes: ["source.clojure", "meta.expression.clojure", "storage.control.clojure"]
 
   it "tokenizes global definitions", ->
-    {tokens} = grammar.tokenizeLine "(def foo 'bar)"
-    expect(tokens[1]).toEqual value: "def", scopes: ["source.clojure", "meta.expression.clojure", "meta.definition.global.clojure", "keyword.control.clojure"]
-    expect(tokens[3]).toEqual value: "foo", scopes: ["source.clojure", "meta.expression.clojure", "meta.definition.global.clojure", "entity.global.clojure"]
+    macros = ["ns", "declare", "def", "defn", "defn-", "defroutes", "compojure/defroutes", "rum.core/defc123-", "some.nested-ns/def-nested->symbol!?*", "def+!.?abc8:<>", "ns/def+!.?abc8:<>"]
+
+    for macro in macros
+      {tokens} = grammar.tokenizeLine "(#{macro} foo 'bar)"
+      expect(tokens[1]).toEqual value: macro, scopes: ["source.clojure", "meta.expression.clojure", "meta.definition.global.clojure", "keyword.control.clojure"]
+      expect(tokens[3]).toEqual value: "foo", scopes: ["source.clojure", "meta.expression.clojure", "meta.definition.global.clojure", "entity.global.clojure"]
 
   it "tokenizes dynamic variables", ->
     mutables = ["*ns*", "*foo-bar*"]
