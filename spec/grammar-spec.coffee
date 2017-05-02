@@ -347,6 +347,7 @@ describe "Clojure grammar", ->
         # vim:noexpandtab sts:4 ft:clojure ts:4
         # vim:noexpandtab titlestring=hi\\|there\\ ft=clojure ts=4
         # vim:noexpandtab titlestring=hi\\|there\\\\\\ ft=clojure ts=4
+        # vim:ft=coffee ft2=clojure
       """
       for line in invalid.split /\n/
         expect(grammar.firstLineRegex.scanner.findNextMatchSync(line)).toBeNull()
