@@ -1,6 +1,6 @@
 {
   "name": "language-clojure",
-  "version": "0.22.2",
+  "version": "0.22.3",
   "description": "Clojure language support in Atom",
   "engines": {
     "atom": "*",
