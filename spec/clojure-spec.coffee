@@ -12,10 +12,15 @@ describe "Clojure grammar", ->
     expect(grammar).toBeDefined()
     expect(grammar.scopeName).toBe "source.clojure"
 
-  it "tokenizes semi-colon comments", ->
+  it "tokenizes semicolon comments", ->
     {tokens} = grammar.tokenizeLine "; clojure"
     expect(tokens[0]).toEqual value: ";", scopes: ["source.clojure", "comment.line.semicolon.clojure", "punctuation.definition.comment.clojure"]
     expect(tokens[1]).toEqual value: " clojure", scopes: ["source.clojure", "comment.line.semicolon.clojure"]
+
+  it "does not tokenize escaped semicolons as comments", ->
+    {tokens} = grammar.tokenizeLine "\\; clojure"
+    expect(tokens[0]).toEqual value: "\\; ", scopes: ["source.clojure"]
+    expect(tokens[1]).toEqual value: "clojure", scopes: ["source.clojure", "meta.symbol.clojure"]
 
   it "tokenizes shebang comments", ->
     {tokens} = grammar.tokenizeLine "#!/usr/bin/env clojure"

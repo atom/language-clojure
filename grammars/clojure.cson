@@ -86,7 +86,7 @@
 'repository':
   'comment':
     # NOTE: This must be kept as a begin/end match for language-todo to work
-    'begin': ';'
+    'begin': '(?<!\\\\);'
     'beginCaptures':
       '0':
         'name': 'punctuation.definition.comment.clojure'
