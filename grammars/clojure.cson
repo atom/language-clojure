@@ -82,9 +82,6 @@
   {
     'include': '#symbol'
   }
-  {
-    'include': '#whitespace'
-  }
 ]
 'repository':
   'comment':
@@ -214,15 +211,13 @@
     'beginCaptures':
       '1':
         'name': 'punctuation.section.expression.begin.clojure'
-    'end': '(\\))(\\n)|(\\)(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\))'
+    'end': '(\\))$|(\\)(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\))'
     'endCaptures':
       '1':
         'name': 'punctuation.section.expression.end.trailing.clojure'
       '2':
-        'name': 'meta.after-expression.clojure'
-      '3':
         'name': 'punctuation.section.expression.end.trailing.clojure'
-      '4':
+      '3':
         'name': 'punctuation.section.expression.end.clojure'
     'name': 'meta.quoted-expression.clojure'
     'patterns': [
@@ -270,15 +265,13 @@
     'beginCaptures':
       '1':
         'name': 'punctuation.section.expression.begin.clojure'
-    'end': '(\\))(\\n)|(\\)(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\))'
+    'end': '(\\))$|(\\)(?=[\\}\\]\\)\\s]*(?:;|$)))|(\\))'
     'endCaptures':
       '1':
         'name': 'punctuation.section.expression.end.trailing.clojure'
       '2':
-        'name': 'meta.after-expression.clojure'
-      '3':
         'name': 'punctuation.section.expression.end.trailing.clojure'
-      '4':
+      '3':
         'name': 'punctuation.section.expression.end.clojure'
     'name': 'meta.expression.clojure'
     'patterns': [
@@ -403,6 +396,3 @@
         'include': '$self'
       }
     ]
-  'whitespace':
-    'match': '\\s+$'
-    'name': 'invalid.trailing-whitespace'

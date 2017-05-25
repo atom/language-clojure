@@ -155,15 +155,11 @@ describe "Clojure grammar", ->
     expect(tokens[1]).toEqual value: "/", scopes: ["source.clojure"]
     expect(tokens[2]).toEqual value: "bar", scopes: ["source.clojure", "meta.symbol.clojure"]
 
-  it "tokenizes trailing whitespace", ->
-    {tokens} = grammar.tokenizeLine "   \n"
-    expect(tokens[0]).toEqual value: "   \n", scopes: ["source.clojure", "invalid.trailing-whitespace"]
-
   testMetaSection = (metaScope, puncScope, startsWith, endsWith) ->
     # Entire expression on one line.
     {tokens} = grammar.tokenizeLine "#{startsWith}foo, bar#{endsWith}"
 
-    [start, mid..., end, after] = tokens
+    [start, mid..., end] = tokens
 
     expect(start).toEqual value: startsWith, scopes: ["source.clojure", "meta.#{metaScope}.clojure", "punctuation.section.#{puncScope}.begin.clojure"]
     expect(end).toEqual value: endsWith, scopes: ["source.clojure", "meta.#{metaScope}.clojure", "punctuation.section.#{puncScope}.end.trailing.clojure"]
@@ -181,7 +177,7 @@ describe "Clojure grammar", ->
     for token in mid
       expect(token.scopes.slice(0, 2)).toEqual ["source.clojure", "meta.#{metaScope}.clojure"]
 
-    [mid..., end, after] = tokens[1]
+    [mid..., end] = tokens[1]
 
     expect(end).toEqual value: endsWith, scopes: ["source.clojure", "meta.#{metaScope}.clojure", "punctuation.section.#{puncScope}.end.trailing.clojure"]
 
