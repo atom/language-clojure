@@ -109,3 +109,7 @@
   'println':
     'prefix': 'prnl'
     'body': '(println $1)'
+
+  'console.log':
+    'prefix': 'log'
+    'body': '(js/console.log $1)'
