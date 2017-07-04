@@ -10,6 +10,8 @@
   'clojure'
   'edn'
   'org'
+  'joke'
+  'joker'
 ]
 'foldingStartMarker': '\\(\\s*$'
 'foldingStopMarker': '^\\s*\\)'
