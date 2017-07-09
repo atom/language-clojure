@@ -101,6 +101,9 @@ describe "Clojure grammar", ->
         {tokens} = grammar.tokenizeLine line
         expect(tokens[1]).toEqual value: ":foo", scopes: ["source.clojure", metaScope, "constant.keyword.clojure"]
 
+    {tokens} = grammar.tokenizeLine "(def foo :bar)"
+    expect(tokens[5]).toEqual value: ":bar", scopes: ["source.clojure", "meta.expression.clojure", "meta.definition.global.clojure", "constant.keyword.clojure"]
+
   it "tokenizes keyfns (keyword control)", ->
     keyfns = ["declare", "declare-", "ns", "in-ns", "import", "use", "require", "load", "compile", "def", "defn", "defn-", "defmacro"]
 
@@ -159,6 +162,12 @@ describe "Clojure grammar", ->
     expect(tokens[0]).toEqual value: "foo", scopes: ["source.clojure", "meta.symbol.namespace.clojure"]
     expect(tokens[1]).toEqual value: "/", scopes: ["source.clojure"]
     expect(tokens[2]).toEqual value: "bar", scopes: ["source.clojure", "meta.symbol.clojure"]
+
+    {tokens} = grammar.tokenizeLine "x"
+    expect(tokens[0]).toEqual value: "x", scopes: ["source.clojure", "meta.symbol.clojure"]
+
+    {tokens} = grammar.tokenizeLine "1foobar"
+    expect(tokens[0]).not.toEqual value: "1foobar", scopes: ["source.clojure", "meta.symbol.clojure"]
 
   testMetaSection = (metaScope, puncScope, startsWith, endsWith) ->
     # Entire expression on one line.
