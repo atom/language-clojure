@@ -1,3 +1,11 @@
 '.source.clojure':
-  'editor':
-    'commentStart': '; '
+  editor:
+    commentStart: '; '
+    nonWordCharacters: '\()"\',;~@#%^[]{}`'
+  'bracket-matcher':
+    autocompleteCharacters: [
+      "()"
+      "[]"
+      "{}"
+      "\"\""
+    ]
