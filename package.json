@@ -2,6 +2,9 @@
   "name": "language-clojure",
   "version": "0.22.4",
   "description": "Clojure language support in Atom",
+  "scripts": {
+    "lint": "coffeelint -f coffeelint.json **/*.coffee"
+  },
   "engines": {
     "atom": "*",
     "node": "*"
@@ -16,6 +19,6 @@
     "url": "https://github.com/atom/language-clojure/issues"
   },
   "devDependencies": {
-    "coffeelint": "^1.10.1"
+    "coffeelint": "2.0.7"
   }
 }
