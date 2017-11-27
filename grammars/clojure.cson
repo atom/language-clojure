@@ -284,7 +284,6 @@
           '1':
             'name': 'keyword.control.clojure'
         'end': '(?=\\))'
-        'name': 'meta.definition.global.clojure'
         'patterns': [
           {
             # there may be some metadata before an actual definition
@@ -297,7 +296,7 @@
             # recognizing a symbol as being defined here
             # copied and pasted from #symbol, screw it
             'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]+)'
-            'name': 'entity.global.clojure'
+            'name': 'meta.definition.global.clojure entity.name.global.clojure'
           }
           {
             'include': '$self'
