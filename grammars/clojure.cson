@@ -292,7 +292,7 @@
           {
             # recognizing a symbol as being defined here
             # copied and pasted from #symbol, screw it
-            'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]+)'
+            'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*)'
             'name': 'meta.definition.global.clojure entity.name.global.clojure'
           }
           { # dynamic variables are rendered diferently
@@ -364,7 +364,7 @@
     'patterns': [
       { # copied from #symbol, plus a / at the end. Matches the "app/" part of
         # "app/*config*"
-        'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]+)/'
+        'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*)/'
         'captures':
           '1':
             'name': 'meta.symbol.namespace.clojure'
@@ -373,7 +373,7 @@
   'symbol':
     'patterns': [
       {
-        'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]+)'
+        'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*)' 
         'name': 'meta.symbol.clojure'
       }
     ]
