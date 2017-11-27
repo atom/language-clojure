@@ -155,7 +155,7 @@
       }
     ]
   'dynamic-variables':
-    'match': '\\*[\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\d]+\\*'
+    'match': '\\*[0-9#\'A-Z_a-z!$%&+\\-.:<=>?|]+\\*'
     'name': 'meta.symbol.dynamic.clojure'
   'map':
     'begin': '(\\{)'
@@ -279,7 +279,7 @@
     'patterns': [
       {
         # ns, declare and everything that starts with def* or namespace/def*
-        'begin': '(?<=\\()(ns|declare|def[\\w\\d._:+=><!?*-]*|[\\w._:+=><!?*-][\\w\\d._:+=><!?*-]*/def[\\w\\d._:+=><!?*-]*)\\s+'
+        'begin': '(?<=\\()(ns|declare|def[0-9#\'A-Z_a-z!$%&+\\-.:<=>?|*]*|[A-Z_a-z!$%&+\\-.:<=>?|*][0-9#\'A-Z_a-z!$%&+\\-.:<=>?|*]*/def[0-9#\'A-Z_a-z!$%&+\\-.:<=>?|*]*)\\s+'
         'beginCaptures':
           '1':
             'name': 'keyword.control.clojure'
@@ -292,7 +292,7 @@
           {
             # recognizing a symbol as being defined here
             # copied and pasted from #symbol, screw it
-            'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*)'
+            'match': '([A-Z_a-z!$%&+\\-.:<=>?|*][0-9#\'A-Z_a-z!$%&+\\-.:<=>?|*]*)'
             'name': 'meta.definition.global.clojure entity.name.global.clojure'
           }
           { # dynamic variables are rendered diferently
@@ -364,7 +364,7 @@
     'patterns': [
       { # copied from #symbol, plus a / at the end. Matches the "app/" part of
         # "app/*config*"
-        'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*)/'
+        'match': '([A-Z_a-z!$%&+\\-.:<=>?|*][0-9#\'A-Z_a-z!$%&+\\-.:<=>?|*]*)/'
         'captures':
           '1':
             'name': 'meta.symbol.namespace.clojure'
@@ -373,12 +373,12 @@
   'symbol':
     'patterns': [
       {
-        'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*)' 
+        'match': '([A-Z_a-z!$%&+\\-.:<=>?|*][0-9#\'A-Z_a-z!$%&+\\-.:<=>?|*]*)'
         'name': 'meta.symbol.clojure'
       }
     ]
   'var':
-    'match': '(?<=(\\s|\\(|\\[|\\{)\\#)\'[a-zA-Z0-9\\.\\-\\_\\:\\+\\=\\>\\<\\/\\!\\?\\*]+(?=(\\s|\\)|\\]|\\}))'
+    'match': '(?<=(\\s|\\(|\\[|\\{)\\#)\'[A-Z_a-z!$%&+\\-.:<=>?|*][0-9#\'A-Z_a-z!$%&+\\-.:<=>?|*/]*(?=(\\s|\\)|\\]|\\}))'
     'name': 'meta.var.clojure'
   'vector':
     'begin': '(\\[)'
