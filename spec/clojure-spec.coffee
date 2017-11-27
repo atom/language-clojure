@@ -117,14 +117,16 @@ describe "Clojure grammar", ->
 
   it "tokenizes global definitions", ->
     macros = ["ns", "declare", "def", "defn", "defn-", "defroutes", "compojure/defroutes", "rum.core/defc123-", "some.nested-ns/def-nested->symbol!?*", "def+!.?abc8:<>", "ns/def+!.?abc8:<>"]
+    symbols = ["foo", "f", "f'", "*f*"]
 
     for macro in macros
-      {tokens} = grammar.tokenizeLine "(#{macro} foo 'bar)"
-      expect(tokens[1]).toEqual value: macro, scopes: ["source.clojure", "meta.expression.clojure", "meta.definition.global.clojure", "keyword.control.clojure"]
-      expect(tokens[3]).toEqual value: "foo", scopes: ["source.clojure", "meta.expression.clojure", "meta.definition.global.clojure", "entity.global.clojure"]
+      for symbol in symbols
+        {tokens} = grammar.tokenizeLine "(#{macro} #{symbol} 'bar)"
+        expect(tokens[1]).toEqual value: macro, scopes: ["source.clojure", "meta.expression.clojure", "keyword.control.clojure"]
+        expect(tokens[3]).toEqual value: symbol, scopes: ["source.clojure", "meta.expression.clojure", "meta.definition.global.clojure entity.name.global.clojure"]
 
   it "tokenizes dynamic variables", ->
-    mutables = ["*ns*", "*foo-bar*"]
+    mutables = ["*ns*", "*foo-bar*", "*1#*"]
 
     for mutable in mutables
       {tokens} = grammar.tokenizeLine mutable
@@ -155,10 +157,12 @@ describe "Clojure grammar", ->
     expect(tokens[3]).toEqual value: "'foo", scopes: ["source.clojure", "meta.expression.clojure", "meta.var.clojure"]
 
   it "tokenizes symbols", ->
-    {tokens} = grammar.tokenizeLine "foo/bar"
-    expect(tokens[0]).toEqual value: "foo", scopes: ["source.clojure", "meta.symbol.namespace.clojure"]
-    expect(tokens[1]).toEqual value: "/", scopes: ["source.clojure"]
-    expect(tokens[2]).toEqual value: "bar", scopes: ["source.clojure", "meta.symbol.clojure"]
+    for ns in ["foo", "f", "f1", "ns.ns"]
+      for symbol in ["bar", "b", "b2", "b'", "bar.bar"]
+        {tokens} = grammar.tokenizeLine "#{ns}/#{symbol}"
+        expect(tokens[0]).toEqual value: ns, scopes: ["source.clojure", "meta.symbol.namespace.clojure"]
+        expect(tokens[1]).toEqual value: "/", scopes: ["source.clojure"]
+        expect(tokens[2]).toEqual value: symbol, scopes: ["source.clojure", "meta.symbol.clojure"]
 
   testMetaSection = (metaScope, puncScope, startsWith, endsWith) ->
     # Entire expression on one line.
