@@ -289,14 +289,14 @@
             # there may be some metadata before an actual definition
             'include': '#metadata'
           }
-          { # dynamic variables are rendered diferently
-            'include': '#dynamic-variables'
-          }
           {
             # recognizing a symbol as being defined here
             # copied and pasted from #symbol, screw it
             'match': '([\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]+)'
             'name': 'meta.definition.global.clojure entity.name.global.clojure'
+          }
+          { # dynamic variables are rendered diferently
+            'include': '#dynamic-variables'
           }
           {
             'include': '$self'
