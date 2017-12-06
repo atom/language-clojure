@@ -284,6 +284,7 @@
           '1':
             'name': 'keyword.control.clojure'
         'end': '(?=\\))'
+        'name': 'meta.definition.global.clojure'
         'patterns': [
           {
             # there may be some metadata before an actual definition
@@ -293,7 +294,7 @@
             # recognizing a symbol as being defined here
             # copied and pasted from #symbol, screw it
             'match': '([A-Z_a-z!$%&+\\-.:<=>?|*][0-9#\'A-Z_a-z!$%&+\\-.:<=>?|*]*)'
-            'name': 'meta.definition.global.clojure entity.name.global.clojure'
+            'name': 'entity.name.definition.clojure'
           }
           { # dynamic variables are rendered diferently
             'include': '#dynamic-variables'
@@ -320,17 +321,6 @@
       }
       {
         'include': '#sexp'
-      }
-      {
-        'match': '(?<=\\()(.+?)(?=\\s|\\))'
-        'captures':
-          '1':
-            'name': 'entity.name.function.clojure'
-        'patterns': [
-          {
-            'include': '$self'
-          }
-        ]
       }
       {
         'include': '$self'

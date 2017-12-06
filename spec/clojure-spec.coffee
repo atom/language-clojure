@@ -122,8 +122,8 @@ describe "Clojure grammar", ->
     for macro in macros
       for symbol in symbols
         {tokens} = grammar.tokenizeLine "(#{macro} #{symbol} 'bar)"
-        expect(tokens[1]).toEqual value: macro, scopes: ["source.clojure", "meta.expression.clojure", "keyword.control.clojure"]
-        expect(tokens[3]).toEqual value: symbol, scopes: ["source.clojure", "meta.expression.clojure", "meta.definition.global.clojure entity.name.global.clojure"]
+        expect(tokens[1]).toEqual value: macro, scopes: ["source.clojure", "meta.expression.clojure", "meta.definition.global.clojure", "keyword.control.clojure"]
+        expect(tokens[3]).toEqual value: symbol, scopes: ["source.clojure", "meta.expression.clojure", "meta.definition.global.clojure", "entity.name.definition.clojure"]
 
   it "tokenizes dynamic variables", ->
     mutables = ["*ns*", "*foo-bar*", "*1#*"]
@@ -149,7 +149,7 @@ describe "Clojure grammar", ->
 
     for expr in expressions
       {tokens} = grammar.tokenizeLine expr
-      expect(tokens[1]).toEqual value: "foo", scopes: ["source.clojure", "meta.expression.clojure", "entity.name.function.clojure"]
+      expect(tokens[1]).toEqual value: "foo", scopes: ["source.clojure", "meta.expression.clojure", "meta.symbol.clojure"]
 
   it "tokenizes vars", ->
     {tokens} = grammar.tokenizeLine "(func #'foo)"
@@ -213,7 +213,7 @@ describe "Clojure grammar", ->
     {tokens} = grammar.tokenizeLine "((foo bar) baz)"
     expect(tokens[0]).toEqual value: "(", scopes: ["source.clojure", "meta.expression.clojure", "punctuation.section.expression.begin.clojure"]
     expect(tokens[1]).toEqual value: "(", scopes: ["source.clojure", "meta.expression.clojure", "meta.expression.clojure", "punctuation.section.expression.begin.clojure"]
-    expect(tokens[2]).toEqual value: "foo", scopes: ["source.clojure", "meta.expression.clojure", "meta.expression.clojure", "entity.name.function.clojure"]
+    expect(tokens[2]).toEqual value: "foo", scopes: ["source.clojure", "meta.expression.clojure", "meta.expression.clojure", "meta.symbol.clojure"]
     expect(tokens[3]).toEqual value: " ", scopes: ["source.clojure", "meta.expression.clojure", "meta.expression.clojure"]
     expect(tokens[4]).toEqual value: "bar", scopes: ["source.clojure", "meta.expression.clojure", "meta.expression.clojure", "meta.symbol.clojure"]
     expect(tokens[5]).toEqual value: ")", scopes: ["source.clojure", "meta.expression.clojure", "meta.expression.clojure", "punctuation.section.expression.end.clojure"]
