@@ -1,4 +1,3 @@
 '.source.clojure':
   'editor':
-    'nonWordCharacters': '/\\()":,.;<>~@#$%^&|=[]{}`…'
     'commentStart': '; '
