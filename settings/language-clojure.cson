@@ -1,4 +1,5 @@
 '.source.clojure':
   'editor':
-    'nonWordCharacters': '/\\()":,.;<>~@#$%^&|=[]{}`…'
     'commentStart': '; '
+  'autocomplete':
+    'extraWordCharacters': '-'
