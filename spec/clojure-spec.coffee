@@ -166,8 +166,9 @@ describe "Clojure grammar", ->
     {tokens} = grammar.tokenizeLine "x"
     expect(tokens[0]).toEqual value: "x", scopes: ["source.clojure", "meta.symbol.clojure"]
 
+    # Should not be tokenized as a symbol
     {tokens} = grammar.tokenizeLine "1foobar"
-    expect(tokens[0]).not.toEqual value: "1foobar", scopes: ["source.clojure", "meta.symbol.clojure"]
+    expect(tokens[0]).not.toEqual value: "1", scopes: ["source.clojure", "constant.numeric.long.clojure"]
 
   testMetaSection = (metaScope, puncScope, startsWith, endsWith) ->
     # Entire expression on one line.
