@@ -150,7 +150,7 @@
         'name': 'storage.control.clojure'
       }
       {
-        'match': '(?<=(\\s|\\(|\\[|\\{))(declare-?|(in-)?ns|import|use|require|load|compile|(def[a-z\\-]*))(?=(\\s|\\)|\\]|\\}))'
+        'match': '(?<=(\\s|\\(|\\[|\\{))(declare-?|(in-)?ns|import|use|require|load|compile|(def(?!ault)[a-z\\-]*))(?=(\\s|\\)|\\]|\\}))'
         'name': 'keyword.control.clojure'
       }
     ]
@@ -278,8 +278,8 @@
     'name': 'meta.expression.clojure'
     'patterns': [
       {
-        # ns, declare and everything that starts with def* or namespace/def*
-        'begin': '(?<=\\()(ns|declare|def[\\w\\d._:+=><!?*-]*|[\\w._:+=><!?*-][\\w\\d._:+=><!?*-]*/def[\\w\\d._:+=><!?*-]*)\\s+'
+        # ns, declare and everything that starts with def* or namespace/def* (except default*)
+        'begin': '(?<=\\()(ns|declare|def(?!ault)[\\w.:+=><!?*-]*|[a-zA-Z.:+=><!?*-][\\w.:+=><!?*-]*/def(?!ault)[\\w.:+=><!?*-]*)\\s+'
         'beginCaptures':
           '1':
             'name': 'keyword.control.clojure'
