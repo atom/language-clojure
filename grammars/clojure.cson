@@ -109,7 +109,7 @@
         'name': 'constant.numeric.ratio.clojure'
       }
       {
-        'match': '(-?\\d+[rR][0-9a-zA-Z]+)'
+        'match': '(-?\\d+[rR]\\w+)'
         'name': 'constant.numeric.arbitrary-radix.clojure'
       }
       {
@@ -141,16 +141,16 @@
       }
     ]
   'keyword':
-    'match': '(?<=(\\s|\\(|\\[|\\{)):[a-zA-Z0-9\\#\\.\\-\\_\\:\\+\\=\\>\\<\\/\\!\\?\\*]+(?=(\\s|\\)|\\]|\\}|\\,))'
+    'match': '(?<=(\\s|\\(|\\[|\\{)):[\\w\\#\\.\\-\\_\\:\\+\\=\\>\\<\\/\\!\\?\\*]+(?=(\\s|\\)|\\]|\\}|\\,))'
     'name': 'constant.keyword.clojure'
   'keyfn':
     'patterns': [
       {
-        'match': '(?<=(\\s|\\(|\\[|\\{))(if(-[-a-z\\?]*)?|when(-[-a-z]*)?|for(-[-a-z]*)?|cond|do|let(-[-a-z\\?]*)?|binding|loop|recur|fn|throw[a-z\\-]*|try|catch|finally|([a-z]*case))(?=(\\s|\\)|\\]|\\}))'
+        'match': '(?<=(\\s|\\(|\\[|\\{))(if(-[-\\p{Ll}\\?]*)?|when(-[-\\p{Ll}]*)?|for(-[-\\p{Ll}]*)?|cond|do|let(-[-\\p{Ll}\\?]*)?|binding|loop|recur|fn|throw[\\p{Ll}\\-]*|try|catch|finally|([\\p{Ll}]*case))(?=(\\s|\\)|\\]|\\}))'
         'name': 'storage.control.clojure'
       }
       {
-        'match': '(?<=(\\s|\\(|\\[|\\{))(declare-?|(in-)?ns|import|use|require|load|compile|(def[a-z\\-]*))(?=(\\s|\\)|\\]|\\}))'
+        'match': '(?<=(\\s|\\(|\\[|\\{))(declare-?|(in-)?ns|import|use|require|load|compile|(def[\\p{Ll}\\-]*))(?=(\\s|\\)|\\]|\\}))'
         'name': 'keyword.control.clojure'
       }
     ]
@@ -296,7 +296,7 @@
           {
             # recognizing a symbol as being defined here
             # copied and pasted from #symbol, screw it
-            'match': '([a-zA-Z\\.\\-\\_\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*)'
+            'match': '([\\p{L}\\.\\-\\_\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*)'
             'name': 'entity.global.clojure'
           }
           {
@@ -365,7 +365,7 @@
     'patterns': [
       { # copied from #symbol, plus a / at the end. Matches the "app/" part of
         # "app/*config*"
-        'match': '([a-zA-Z\\.\\-\\_\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*)/'
+        'match': '([\\p{L}\\.\\-\\_\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*)/'
         'captures':
           '1':
             'name': 'meta.symbol.namespace.clojure'
@@ -374,12 +374,12 @@
   'symbol':
     'patterns': [
       {
-        'match': '([a-zA-Z\\.\\-\\_\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*)'
+        'match': '([\\p{L}\\.\\-\\_\\+\\=\\>\\<\\!\\?\\*][\\w\\.\\-\\_\\:\\+\\=\\>\\<\\!\\?\\*\\d]*)'
         'name': 'meta.symbol.clojure'
       }
     ]
   'var':
-    'match': '(?<=(\\s|\\(|\\[|\\{)\\#)\'[a-zA-Z0-9\\.\\-\\_\\:\\+\\=\\>\\<\\/\\!\\?\\*]+(?=(\\s|\\)|\\]|\\}))'
+    'match': '(?<=(\\s|\\(|\\[|\\{)\\#)\'[\\w\\.\\-\\_\\:\\+\\=\\>\\<\\/\\!\\?\\*]+(?=(\\s|\\)|\\]|\\}))'
     'name': 'meta.var.clojure'
   'vector':
     'begin': '(\\[)'

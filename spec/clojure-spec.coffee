@@ -63,7 +63,7 @@ describe "Clojure grammar", ->
   it "tokenizes numerics", ->
     numbers =
       "constant.numeric.ratio.clojure": ["1/2", "123/456"]
-      "constant.numeric.arbitrary-radix.clojure": ["2R1011", "16rDEADBEEF"]
+      "constant.numeric.arbitrary-radix.clojure": ["2R1011", "16rDEADBEEF", "56råäöÅÄÖπ"]
       "constant.numeric.hexadecimal.clojure": ["0xDEADBEEF", "0XDEADBEEF"]
       "constant.numeric.octal.clojure": ["0123"]
       "constant.numeric.bigdecimal.clojure": ["123.456M"]
@@ -104,8 +104,12 @@ describe "Clojure grammar", ->
     {tokens} = grammar.tokenizeLine "(def foo :bar)"
     expect(tokens[5]).toEqual value: ":bar", scopes: ["source.clojure", "meta.expression.clojure", "meta.definition.global.clojure", "constant.keyword.clojure"]
 
+    # keywords can start with an uppercase non-ASCII letter
+    {tokens} = grammar.tokenizeLine "(def foo :Öπ)"
+    expect(tokens[5]).toEqual value: ":Öπ", scopes: ["source.clojure", "meta.expression.clojure", "meta.definition.global.clojure", "constant.keyword.clojure"]
+
   it "tokenizes keyfns (keyword control)", ->
-    keyfns = ["declare", "declare-", "ns", "in-ns", "import", "use", "require", "load", "compile", "def", "defn", "defn-", "defmacro"]
+    keyfns = ["declare", "declare-", "ns", "in-ns", "import", "use", "require", "load", "compile", "def", "defn", "defn-", "defmacro", "defåπç"]
 
     for keyfn in keyfns
       {tokens} = grammar.tokenizeLine "(#{keyfn})"
@@ -119,7 +123,7 @@ describe "Clojure grammar", ->
       expect(tokens[1]).toEqual value: keyfn, scopes: ["source.clojure", "meta.expression.clojure", "storage.control.clojure"]
 
   it "tokenizes global definitions", ->
-    macros = ["ns", "declare", "def", "defn", "defn-", "defroutes", "compojure/defroutes", "rum.core/defc123-", "some.nested-ns/def-nested->symbol!?*", "def+!.?abc8:<>", "ns/def+!.?abc8:<>"]
+    macros = ["ns", "declare", "def", "defn", "defn-", "defroutes", "compojure/defroutes", "rum.core/defc123-", "some.nested-ns/def-nested->symbol!?*", "def+!.?abc8:<>", "ns/def+!.?abc8:<>", "ns/defåÄÖπç"]
 
     for macro in macros
       {tokens} = grammar.tokenizeLine "(#{macro} foo 'bar)"
@@ -127,7 +131,7 @@ describe "Clojure grammar", ->
       expect(tokens[3]).toEqual value: "foo", scopes: ["source.clojure", "meta.expression.clojure", "meta.definition.global.clojure", "entity.global.clojure"]
 
   it "tokenizes dynamic variables", ->
-    mutables = ["*ns*", "*foo-bar*"]
+    mutables = ["*ns*", "*foo-bar*", "*åÄÖπç*"]
 
     for mutable in mutables
       {tokens} = grammar.tokenizeLine mutable
@@ -137,6 +141,11 @@ describe "Clojure grammar", ->
     {tokens} = grammar.tokenizeLine "^Foo"
     expect(tokens[0]).toEqual value: "^", scopes: ["source.clojure", "meta.metadata.simple.clojure"]
     expect(tokens[1]).toEqual value: "Foo", scopes: ["source.clojure", "meta.metadata.simple.clojure", "meta.symbol.clojure"]
+
+    # non-ASCII letters
+    {tokens} = grammar.tokenizeLine "^Öπ"
+    expect(tokens[0]).toEqual value: "^", scopes: ["source.clojure", "meta.metadata.simple.clojure"]
+    expect(tokens[1]).toEqual value: "Öπ", scopes: ["source.clojure", "meta.metadata.simple.clojure", "meta.symbol.clojure"]
 
     {tokens} = grammar.tokenizeLine "^{:foo true}"
     expect(tokens[0]).toEqual value: "^{", scopes: ["source.clojure", "meta.metadata.map.clojure", "punctuation.section.metadata.map.begin.clojure"]
@@ -152,23 +161,43 @@ describe "Clojure grammar", ->
       {tokens} = grammar.tokenizeLine expr
       expect(tokens[1]).toEqual value: "foo", scopes: ["source.clojure", "meta.expression.clojure", "entity.name.function.clojure"]
 
+    #non-ASCII letters
+    {tokens} = grammar.tokenizeLine "(Öπ 2 20)"
+    expect(tokens[1]).toEqual value: "Öπ", scopes: ["source.clojure", "meta.expression.clojure", "entity.name.function.clojure"]
+
   it "tokenizes vars", ->
     {tokens} = grammar.tokenizeLine "(func #'foo)"
     expect(tokens[2]).toEqual value: " #", scopes: ["source.clojure", "meta.expression.clojure"]
     expect(tokens[3]).toEqual value: "'foo", scopes: ["source.clojure", "meta.expression.clojure", "meta.var.clojure"]
 
+    # non-ASCII letters
+    {tokens} = grammar.tokenizeLine "(func #'Öπ)"
+    expect(tokens[2]).toEqual value: " #", scopes: ["source.clojure", "meta.expression.clojure"]
+    expect(tokens[3]).toEqual value: "'Öπ", scopes: ["source.clojure", "meta.expression.clojure", "meta.var.clojure"]
+
   it "tokenizes symbols", ->
+    {tokens} = grammar.tokenizeLine "x"
+    expect(tokens[0]).toEqual value: "x", scopes: ["source.clojure", "meta.symbol.clojure"]
+
+    # non-ASCII letters
+    {tokens} = grammar.tokenizeLine "Öπ"
+    expect(tokens[0]).toEqual value: "Öπ", scopes: ["source.clojure", "meta.symbol.clojure"]
+
+    # Should not be tokenized as a symbol
+    {tokens} = grammar.tokenizeLine "1foobar"
+    expect(tokens[0]).toEqual value: "1", scopes: ["source.clojure", "constant.numeric.long.clojure"]
+
+  it "tokenizes namespaces", ->
     {tokens} = grammar.tokenizeLine "foo/bar"
     expect(tokens[0]).toEqual value: "foo", scopes: ["source.clojure", "meta.symbol.namespace.clojure"]
     expect(tokens[1]).toEqual value: "/", scopes: ["source.clojure"]
     expect(tokens[2]).toEqual value: "bar", scopes: ["source.clojure", "meta.symbol.clojure"]
 
-    {tokens} = grammar.tokenizeLine "x"
-    expect(tokens[0]).toEqual value: "x", scopes: ["source.clojure", "meta.symbol.clojure"]
-
-    # Should not be tokenized as a symbol
-    {tokens} = grammar.tokenizeLine "1foobar"
-    expect(tokens[0]).toEqual value: "1", scopes: ["source.clojure", "constant.numeric.long.clojure"]
+    # non-ASCII letters
+    {tokens} = grammar.tokenizeLine "Öπ/Åä"
+    expect(tokens[0]).toEqual value: "Öπ", scopes: ["source.clojure", "meta.symbol.namespace.clojure"]
+    expect(tokens[1]).toEqual value: "/", scopes: ["source.clojure"]
+    expect(tokens[2]).toEqual value: "Åä", scopes: ["source.clojure", "meta.symbol.clojure"]
 
   testMetaSection = (metaScope, puncScope, startsWith, endsWith) ->
     # Entire expression on one line.
