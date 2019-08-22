@@ -327,11 +327,6 @@
         'captures':
           '1':
             'name': 'entity.name.function.clojure'
-        'patterns': [
-          {
-            'include': '$self'
-          }
-        ]
       }
       {
         'include': '$self'
