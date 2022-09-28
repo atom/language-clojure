@@ -1,4 +1,5 @@
-# Clojure language support in Atom
+##### Atom and all repositories under Atom will be archived on December 15, 2022. Learn more in our [official announcement](https://github.blog/2022-06-08-sunsetting-atom/)
+ # Clojure language support in Atom
 [![macOS Build Status](https://travis-ci.org/atom/language-clojure.svg?branch=master)](https://travis-ci.org/atom/language-clojure) [![Build status](https://ci.appveyor.com/api/projects/status/6kd5fs48y5hixde6/branch/master?svg=true)](https://ci.appveyor.com/project/Atom/language-clojure/branch/master) [![Dependency Status](https://david-dm.org/atom/language-clojure.svg)](https://david-dm.org/atom/language-clojure) 
 
 Adds syntax highlighting to Clojure files in Atom.
