@@ -1,5 +1,6 @@
 '.source.clojure':
   'editor':
+    'autoIndentOnPaste': false
     'commentStart': '; '
   'autocomplete':
     'extraWordCharacters': '-'
